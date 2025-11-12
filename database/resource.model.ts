@@ -12,7 +12,7 @@ export interface IResource extends Document {
   title: string;
   platform: string;
   url: string;
-  relatedSkill: string;
+  relatedSkills: string[];
   cost: ResourceCost;
   description?: string;
   createdAt: Date;
@@ -38,16 +38,16 @@ const ResourceSchema = new Schema<IResource>(
       type: String,
       required: [true, "Resource URL is required"],
       trim: true,
-      validate: {
-        validator: (value: string) =>
-          /^(https?:\/\/)?([\w.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/.test(value),
-        message: "Invalid URL format",
-      },
     },
-    relatedSkill: {
-      type: String,
-      required: [true, "Related skill is required"],
-      trim: true,
+    relatedSkills: {
+      type: [String],
+      required: [true, "At least one related skill is required"],
+      default: [],
+      validate: {
+        validator: (skills: string[]) =>
+          Array.isArray(skills) && skills.every((s) => typeof s === "string"),
+        message: "Related skills must be an array of strings",
+      },
     },
     cost: {
       type: String,
