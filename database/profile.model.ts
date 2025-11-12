@@ -7,7 +7,7 @@ export interface IProfile extends Document {
   userId: Schema.Types.ObjectId;
   fullName: string;
   education: string;
-  experienceLevel: "Fresher" | "Junior" | "Mid";
+  experienceLevel: ExperienceLevel;
   careerTrack: string;
   skills?: string[];
   createdAt: Date;
@@ -16,8 +16,8 @@ export interface IProfile extends Document {
 
 export enum ExperienceLevel {
   Fresher = "Fresher",
-  Junior = "Junior",
   Mid = "Mid",
+  Experienced = "Experienced",
 }
 
 /**

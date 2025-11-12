@@ -30,13 +30,14 @@ export default function SignupForm() {
     const formData = new FormData(e.currentTarget);
 
     startTransition(async () => {
+      const toastId = toast.loading("Creating your account...");
       const res = await signupHandler(formData);
 
       if (res.success) {
-        toast.success(res.message);
         router.push("/dashboard");
+        toast.success(res.message, { id: toastId });
       } else {
-        toast.error(res.message);
+        toast.error(res.message, { id: toastId });
       }
     });
   };
@@ -97,8 +98,8 @@ export default function SignupForm() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Fresher">Fresher</SelectItem>
-                <SelectItem value="Junior">Junior</SelectItem>
                 <SelectItem value="Mid">Mid</SelectItem>
+                <SelectItem value="Experienced">Experienced</SelectItem>
               </SelectContent>
             </Select>
           </Field>

@@ -11,7 +11,7 @@ const jobData = [
     location: "Remote",
     jobType: "Full-Time",
     requiredSkills: ["React", "TypeScript", "Next.js"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Build and maintain web interfaces for our core platform.",
   },
   {
@@ -47,7 +47,7 @@ const jobData = [
     location: "Dhaka",
     jobType: "Full-Time",
     requiredSkills: ["SEO", "Content Writing", "Google Ads"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Support digital marketing campaigns and analytics.",
   },
   {
@@ -74,7 +74,7 @@ const jobData = [
     location: "Remote",
     jobType: "Full-Time",
     requiredSkills: ["React Native", "TypeScript", "API Integration"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Develop cross-platform mobile apps using React Native.",
   },
   {
@@ -120,7 +120,7 @@ const jobData = [
     location: "Remote",
     jobType: "Full-Time",
     requiredSkills: ["Cloud Computing", "AWS", "Networking"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Provide cloud support and help maintain system uptime.",
   },
   {
@@ -138,7 +138,7 @@ const jobData = [
     location: "Remote",
     jobType: "Full-Time",
     requiredSkills: ["React", "UI/UX Design", "Tailwind CSS"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Implement UI components and ensure accessibility compliance.",
   },
   {
@@ -156,7 +156,7 @@ const jobData = [
     location: "Remote",
     jobType: "Full-Time",
     requiredSkills: ["Manual Testing", "Automation", "Bug Reporting"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Test web and mobile applications for quality assurance.",
   },
   {
@@ -165,7 +165,7 @@ const jobData = [
     location: "Dhaka",
     jobType: "Full-Time",
     requiredSkills: ["Project Management", "Communication", "Agile"],
-    experienceLevel: "Junior",
+    experienceLevel: "Experienced",
     description: "Coordinate project deliverables and manage team workflows.",
   },
   {

@@ -18,8 +18,8 @@ export async function signupHandler(formData: FormData) {
     const education = formData.get("education-level") as string;
     const experienceLevel = formData.get("experience-level") as
       | "Fresher"
-      | "Junior"
-      | "Mid";
+      | "Mid"
+      | "Experienced";
     const careerTrack =
       (formData.get("career-track") as string) ||
       (formData.get("other-career") as string);
