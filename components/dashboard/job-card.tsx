@@ -1,6 +1,14 @@
 import { IJob } from "@/database/jobs.model";
 import { MapPin } from "lucide-react";
 import { Button } from "../ui/button";
+import { AlertDialogTrigger } from "../ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTrigger,
+} from "../ui/dialog";
+import JobDetailsModal from "./job-details";
 
 function SkillsCard({ skill }: { skill: string }) {
   return (
@@ -20,7 +28,7 @@ export default function JobCard({ job }: { job: IJob }) {
           <MapPin size={20} />
           <p className="text-blue-500">{job.location}</p>
         </p>
-        <p className="text-orange-500">{job.experienceLevel}</p>
+        <p className="text-orange-600">{job.experienceLevel}</p>
       </div>
       {job.requiredSkills && job.requiredSkills.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-3">
@@ -29,9 +37,18 @@ export default function JobCard({ job }: { job: IJob }) {
           ))}
         </div>
       )}
-      <Button className="mt-6 w-full" size="lg" variant="default">
-        View Details
-      </Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="mt-6 w-full" size="lg" variant="default">
+            View Details
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogDescription>
+            <JobDetailsModal job={job} />
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
