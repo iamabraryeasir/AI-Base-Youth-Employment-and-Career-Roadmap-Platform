@@ -1,7 +1,86 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { AlertCircle } from "lucide-react";
+import Link from "next/link";
+import ResourceCard from "@/components/dashboard/resource-card";
+import type { IResource } from "@/database/resource.model";
+
 export default function ResourceMatches() {
+  const [resources, setResources] = useState<IResource[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchRecommendedResources() {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("/api/recommendations/resources", {
+          credentials: "include",
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.message);
+          setResources([]);
+        } else if (data.success) {
+          setResources(data.resources || []);
+        }
+      } catch (err) {
+        setError("Failed to fetch resource recommendations");
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchRecommendedResources();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-96">
+        <div className="animate-spin">
+          <div className="h-12 w-12 border-4 border-primary border-t-transparent rounded-full"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-96 text-center">
+        <AlertCircle size={64} className="text-yellow-600 mb-4" />
+        <h2 className="text-2xl font-semibold mb-2">No Skills Added</h2>
+        <p className="text-muted-foreground mb-6 max-w-md">{error}</p>
+        <Link
+          href="/dashboard/profile"
+          className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
+          Go to Profile & Add Skills
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <span>ResourceMatches</span>
+      <h1 className="text-3xl font-bold mb-6">
+        Recommended Resources Based on Your Skills
+      </h1>
+      {resources.length > 0 ? (
+        <div className="grid grid-cols-3 gap-10">
+          {resources.map((resource, index) => (
+            <ResourceCard key={index} resource={resource} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-10 text-muted-foreground">
+          <p>No matching resources found. Check back later!</p>
+        </div>
+      )}
     </div>
   );
 }

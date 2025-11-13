@@ -1,7 +1,11 @@
-export default function Resources() {
+import AllResourcesTable from "@/components/dashboard/all-resources-table";
+
+export default function AllResourcePage() {
   return (
-    <div>
-      <span>Resources</span>
-    </div>
+    <section>
+      <h1 className="text-2xl font-semibold mb-3">All Recent Resources</h1>
+
+      <AllResourcesTable />
+    </section>
   );
 }
