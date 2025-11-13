@@ -59,7 +59,7 @@ export default function ProfileTop({
   };
 
   return (
-    <div className="p-8 flex space-x-6">
+    <div className="p-8 flex space-x-8 items-center">
       <Image
         src="/images/abrar.jpg"
         alt="Profile picture"
