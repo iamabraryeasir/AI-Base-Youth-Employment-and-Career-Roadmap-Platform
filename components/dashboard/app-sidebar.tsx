@@ -54,7 +54,7 @@ const items = [
     icon: Bot,
   },
   {
-    title: "Skill Boost",
+    title: "Resource Matches",
     url: "/resource-matches",
     icon: Brain,
   },

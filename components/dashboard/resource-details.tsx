@@ -1,13 +1,7 @@
 import type { IResource } from "@/database/resource.model";
-import { CheckCircle } from "lucide-react";
+import { ExternalLink, CheckCircle } from "lucide-react";
+import Link from "next/link";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTrigger,
-} from "../ui/dialog";
-import ResourceDetailsModal from "./resource-details";
 
 function SkillsCard({ skill }: { skill: string }) {
   return (
@@ -26,7 +20,7 @@ function MatchedSkillTag({ skill }: { skill: string }) {
   );
 }
 
-interface ResourceCardProps {
+interface ResourceDetailsModalProps {
   resource: IResource & {
     matchedSkills?: string[];
     score?: number;
@@ -34,11 +28,14 @@ interface ResourceCardProps {
   };
 }
 
-export default function ResourceCard({ resource }: ResourceCardProps) {
+export default function ResourceDetailsModal({
+  resource,
+}: ResourceDetailsModalProps) {
   return (
-    <div className="shadow-md p-6 rounded-2xl bg-linear-to-br from-blue-50">
-      <h3 className="text-2xl font-semibold">{resource.title}</h3>
-      <div className="w-full flex items-center gap-5 mt-4">
+    <div className="text-black">
+      <h1 className="text-2xl font-bold text-black">{resource.title}</h1>
+
+      <div className="flex items-center gap-12 mt-3">
         <p className="text-lg font-medium">{resource.platform}</p>
         <p
           className={`${
@@ -50,19 +47,22 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
       </div>
 
       {resource.matchText && (
-        <div className="mt-3 inline-block bg-green-50 border border-green-200 px-3 py-1 rounded-lg">
+        <div className="mt-4 inline-block bg-green-50 border border-green-200 px-4 py-2 rounded-lg">
           <p className="text-sm font-medium text-green-700">
             {resource.matchText}
           </p>
         </div>
       )}
 
+      <div className="flex flex-col gap-2 mt-7">
+        <p className="font-medium text-[16px]">Description</p>
+        <p>{resource.description}</p>
+      </div>
+
       {resource.matchedSkills && resource.matchedSkills.length > 0 && (
-        <div className="mt-4">
-          <p className="text-sm font-semibold text-gray-700 mb-2">
-            Matched Skills:
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-5">
+          <p className="font-medium text-[16px]">Your Matched Skills:</p>
+          <div className="flex items-center gap-2 flex-wrap mt-2">
             {resource.matchedSkills.map((skill, index) => (
               <MatchedSkillTag key={index} skill={skill} />
             ))}
@@ -71,11 +71,9 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
       )}
 
       {resource.relatedSkills && resource.relatedSkills.length > 0 && (
-        <div className="mt-4">
-          <p className="text-sm font-semibold text-gray-700 mb-2">
-            Related Skills:
-          </p>
-          <div className="flex flex-wrap gap-3">
+        <div className="mt-5">
+          <p className="font-medium text-[16px]">All Related Skills:</p>
+          <div className="flex items-center gap-2 flex-wrap mt-2">
             {resource.relatedSkills.map((skill, index) => (
               <SkillsCard key={index} skill={skill} />
             ))}
@@ -83,18 +81,17 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
         </div>
       )}
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button className="mt-5 w-full" size="lg" variant="default">
-            View Details
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogDescription>
-            <ResourceDetailsModal resource={resource} />
-          </DialogDescription>
-        </DialogContent>
-      </Dialog>
+      <Link
+        href={resource.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block mt-6 w-full"
+      >
+        <Button size="lg" variant="default" className="w-full">
+          <ExternalLink size={16} className="mr-2" />
+          Visit Resource
+        </Button>
+      </Link>
     </div>
   );
 }

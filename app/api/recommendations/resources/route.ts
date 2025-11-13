@@ -46,9 +46,17 @@ export async function GET() {
           userSkills.includes(skill)
         );
 
+        const totalSkills = resource.relatedSkills.length;
+        const matchText =
+          matched.length > 0
+            ? `${matched.length} matched out of ${totalSkills} related skills`
+            : "No skills matched";
+
         return {
           ...resource.toObject(),
           score: matched.length,
+          matchedSkills: matched,
+          matchText: matchText,
         };
       })
       .filter((resource) => resource.score > 0)
