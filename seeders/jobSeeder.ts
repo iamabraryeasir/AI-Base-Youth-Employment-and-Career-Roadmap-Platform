@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { connectDB } from "@/lib/db";
+import { connectDB } from "@/lib/others/db";
 import { Job } from "@/database/jobs.model";
 
 const jobData = [

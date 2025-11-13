@@ -68,9 +68,9 @@ export default function LoginForm() {
         </FieldSet>
 
         <p className="text-center mt-5">
-          Already have an account?{" "}
-          <Link href="/login" className="underline font-semibold">
-            Login
+          Don’t have an account?{" "}
+          <Link href="/signup" className="underline font-semibold">
+            Signup
           </Link>
         </p>
       </form>

@@ -1,7 +1,7 @@
 "use server";
 
-import { auth } from "@/lib/auth";
-import { connectDB } from "@/lib/db";
+import { auth } from "@/lib/auth/auth";
+import { connectDB } from "@/lib/others/db";
 import { Profile } from "@/database/profile.model";
 
 /**
