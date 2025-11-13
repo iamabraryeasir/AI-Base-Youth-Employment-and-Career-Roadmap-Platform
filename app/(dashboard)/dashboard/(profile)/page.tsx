@@ -14,7 +14,11 @@ export default async function ProfilePage() {
 
   return (
     <section className="border rounded-lg">
-      <ProfileTop careerInterest={userProfile?.careerTrack} />
+      <ProfileTop
+        careerInterest={userProfile?.careerTrack}
+        fullName={userProfile?.fullName}
+        profession={userProfile?.education}
+      />
       <Separator />
 
       <SkillsAndExpertise skills={userProfile?.skills} />
