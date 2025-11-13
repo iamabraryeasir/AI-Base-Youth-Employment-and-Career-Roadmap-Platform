@@ -17,6 +17,7 @@ import { LoadingSwap } from "../ui/loading-swap";
 import { signupHandler } from "@/actions/signupHandler";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignupForm() {
   const [isPending, startTransition] = useTransition();
@@ -41,6 +42,7 @@ export default function SignupForm() {
       }
     });
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -184,9 +186,16 @@ export default function SignupForm() {
           </Field>
 
           <Button type="submit" className="mt-4 w-full" size="lg">
-            <LoadingSwap isLoading={false}>Create My Account</LoadingSwap>
+            <LoadingSwap isLoading={isPending}>Create My Account</LoadingSwap>
           </Button>
         </FieldSet>
+
+        <p className="text-center mt-5">
+          Already have an account?{" "}
+          <Link href="/login" className="underline font-semibold">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );
