@@ -2,7 +2,11 @@ import { Pen } from "lucide-react";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 
-export default function ExperienceAndProjects() {
+export default function ExperienceAndProjects({
+  experienceAndProjects,
+}: {
+  experienceAndProjects?: string;
+}) {
   return (
     <div className="p-8">
       <div className="flex justify-between w-full">
@@ -21,6 +25,8 @@ export default function ExperienceAndProjects() {
       <Textarea
         className="mt-5 w-full h-40"
         placeholder="Add your brief experience and project descriptions"
+        value={experienceAndProjects}
+        readOnly
       />
     </div>
   );

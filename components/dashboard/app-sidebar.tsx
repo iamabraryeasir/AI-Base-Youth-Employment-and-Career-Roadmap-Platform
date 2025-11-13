@@ -69,7 +69,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
-        <h2 className="text-xl p-3 font-bold">ElevateCareer</h2>
+        <h2 className="text-2xl p-3.5 font-bold">ElevateCareer</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu className="p-4 gap-5 font-medium">

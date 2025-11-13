@@ -10,6 +10,8 @@ export interface IProfile extends Document {
   experienceLevel: ExperienceLevel;
   careerTrack: string;
   skills?: string[];
+  experienceAndProjectOverview?: string;
+  CVText?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -57,6 +59,16 @@ const ProfileSchema = new Schema<IProfile>(
         validator: (skills: string[]) => Array.isArray(skills),
         message: "Skills must be an array of strings",
       },
+    },
+    experienceAndProjectOverview: {
+      type: String,
+      trim: true,
+      required: false,
+    },
+    CVText: {
+      type: String,
+      trim: true,
+      required: false,
     },
   },
   {

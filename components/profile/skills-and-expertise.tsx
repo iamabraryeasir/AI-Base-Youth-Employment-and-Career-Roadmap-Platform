@@ -1,7 +1,5 @@
-import { CroissantIcon, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Button } from "../ui/button";
-
-const skills = ["JavaScript", "TypeScript", "React", "Node.js", "CSS", "HTML"];
 
 function SkillTag({ skill }: { skill: string }) {
   return (
@@ -12,7 +10,7 @@ function SkillTag({ skill }: { skill: string }) {
   );
 }
 
-export default function SkillsAndExpertise() {
+export default function SkillsAndExpertise({ skills }: { skills?: string[] }) {
   return (
     <div className="p-8">
       <div className="flex items-center justify-between w-full">
@@ -31,7 +29,7 @@ export default function SkillsAndExpertise() {
       <div className="mt-8">
         <p>Your Skills</p>
         <div className="mt-4 flex flex-wrap gap-3">
-          {skills.map((skill) => (
+          {skills?.map((skill) => (
             <SkillTag key={skill} skill={skill} />
           ))}
         </div>

@@ -2,7 +2,11 @@ import { Pen } from "lucide-react";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 
-export default function CvAndAdditionalInfo() {
+export default function CvAndAdditionalInfo({
+  cvAndAdditionalInfo,
+}: {
+  cvAndAdditionalInfo?: string;
+}) {
   return (
     <div className="p-8">
       <div className="flex justify-between w-full">
@@ -22,6 +26,8 @@ export default function CvAndAdditionalInfo() {
       <Textarea
         className="mt-5 w-full h-40"
         placeholder="Add your CV or additional information here"
+        value={cvAndAdditionalInfo}
+        readOnly
       />
     </div>
   );
