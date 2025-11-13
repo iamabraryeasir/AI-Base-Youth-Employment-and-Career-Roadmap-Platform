@@ -15,7 +15,6 @@ import {
   Brain,
   BriefcaseBusiness,
   GraduationCap,
-  Grid2X2,
   User,
 } from "lucide-react";
 import Link from "next/link";
@@ -29,13 +28,8 @@ interface SidebarItem {
 
 const items = [
   {
-    title: "Overview",
-    url: "/",
-    icon: Grid2X2,
-  },
-  {
     title: "Profile",
-    url: "/profile",
+    url: "/",
     icon: User,
   },
   {
@@ -65,9 +59,9 @@ export function AppSidebar() {
 
   const isActive = (itemUrl: string) => {
     const fullUrl = `/dashboard${itemUrl}`;
-    // Exact match for root, partial match for other routes
+    // Root path "/" matches /dashboard or /dashboard/
     if (itemUrl === "/") {
-      return pathname === fullUrl;
+      return pathname === "/dashboard" || pathname === "/dashboard/";
     }
     return pathname.startsWith(fullUrl);
   };

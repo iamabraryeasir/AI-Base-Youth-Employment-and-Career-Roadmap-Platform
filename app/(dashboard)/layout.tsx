@@ -31,7 +31,7 @@ export default async function DashboardLayout({
       <AppSidebar />
       <div className="w-full flex-1 flex-col">
         <DashboardNavbar />
-        <main className="p-4">{children}</main>
+        <main className="p-10">{children}</main>
       </div>
     </SidebarProvider>
   );
