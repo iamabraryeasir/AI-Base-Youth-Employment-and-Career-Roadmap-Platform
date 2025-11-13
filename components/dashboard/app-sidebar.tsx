@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +19,7 @@ import {
   User,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface SidebarItem {
   title: string;
@@ -58,6 +61,17 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
+  const isActive = (itemUrl: string) => {
+    const fullUrl = `/dashboard${itemUrl}`;
+    // Exact match for root, partial match for other routes
+    if (itemUrl === "/") {
+      return pathname === fullUrl;
+    }
+    return pathname.startsWith(fullUrl);
+  };
+
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
@@ -67,8 +81,15 @@ export function AppSidebar() {
         <SidebarMenu className="p-4 gap-5 font-medium">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <Link href={`/dashboard/${item.url}`} className="block p-2">
+              <SidebarMenuButton
+                asChild
+                className={`${
+                  isActive(item.url)
+                    ? "bg-primary text-primary-foreground"
+                    : "hover:bg-accent"
+                }`}
+              >
+                <Link href={`/dashboard${item.url}`} className="block p-2">
                   <item.icon size={25} className="block" />
                   <span className="text-lg font-medium ml-2">{item.title}</span>
                 </Link>
