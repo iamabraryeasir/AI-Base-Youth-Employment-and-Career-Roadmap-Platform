@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import {
   Bot,
+  BotMessageSquare,
   Brain,
   BriefcaseBusiness,
   GraduationCap,
@@ -53,6 +54,11 @@ const items: SidebarItem[] = [
     title: "Resource Matches",
     url: "/resource-matches",
     icon: Brain,
+  },
+  {
+    title: "Ask CareerBot",
+    url: "/careerbot",
+    icon: BotMessageSquare,
   },
   {
     title: "Jobs",
