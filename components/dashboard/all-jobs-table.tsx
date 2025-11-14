@@ -55,7 +55,7 @@ export default function AllJobsTable() {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-3 gap-5">
         {jobs.length > 0 ? (
           jobs.map((job, index) => <JobCard key={index} job={job} />)
         ) : (

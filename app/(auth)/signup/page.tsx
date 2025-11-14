@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function SignupPage() {
   return (
-    <section className="max-w-5xl mx-auto">
+    <section className="max-w-5xl mx-auto pb-12">
       <header className="flex flex-col gap-2 py-8">
         <h1
           className={`flex items-center gap-3 text-2xl font-bold font-in ${inter.className}`}
