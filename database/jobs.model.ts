@@ -12,6 +12,8 @@ export interface IJob extends Document {
   requiredSkills: string[];
   experienceLevel: ExperienceLevel;
   description?: string;
+  jobPlatform?: string;
+  applyUrl?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -55,6 +57,16 @@ const JobSchema = new Schema<IJob>(
       required: [true, "Experience level is required"],
     },
     description: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    jobPlatform: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    applyUrl: {
       type: String,
       trim: true,
       default: "",
