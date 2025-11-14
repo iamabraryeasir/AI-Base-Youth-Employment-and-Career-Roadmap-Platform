@@ -6,6 +6,7 @@ import { RoadmapOverview } from "@/components/dashboard/roadmap/roadmap-overview
 import { RoadmapPhasesList } from "@/components/dashboard/roadmap/roadmap-phases-list";
 import { RoadmapEmptyState } from "@/components/dashboard/roadmap/roadmap-empty-state";
 import { RoadmapErrorState } from "@/components/dashboard/roadmap/roadmap-error-state";
+import { RoadmapDownloadButton } from "@/components/dashboard/roadmap/roadmap-download-button";
 import type { IRoadmap } from "@/database/roadmap.model";
 
 interface RoadmapData extends IRoadmap {
@@ -111,6 +112,12 @@ export default function RoadmapPage() {
             Your personalized learning path to achieve your career goals
           </p>
         </div>
+        {roadmap && (
+          <RoadmapDownloadButton
+            roadmap={roadmap}
+            isDownloading={isGenerating}
+          />
+        )}
       </div>
 
       {error && <RoadmapErrorState error={error} />}
@@ -134,7 +141,9 @@ export default function RoadmapPage() {
           <RoadmapOverview
             targetRole={roadmap.targetRole}
             timeframe={roadmap.timeframe}
-            estimatedCompletionDate={roadmap.estimatedCompletionDate?.toString() || ""}
+            estimatedCompletionDate={
+              roadmap.estimatedCompletionDate?.toString() || ""
+            }
             jobApplicationMonth={roadmap.jobApplicationMonth}
           />
 
