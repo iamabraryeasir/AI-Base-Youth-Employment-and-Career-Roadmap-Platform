@@ -116,7 +116,7 @@ Return ONLY a valid JSON object with no extra text:
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const session = await getServerSession();
     if (!session?.user) {
@@ -146,7 +146,17 @@ export async function GET() {
       );
     }
 
-    const jobs = await Job.find();
+    // Extract pagination params from URL
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const skip = (page - 1) * limit;
+
+    // Get total count of jobs
+    const totalJobs = await Job.countDocuments();
+
+    // Fetch jobs for current page
+    const jobs = await Job.find().skip(skip).limit(limit);
 
     // Analyze each job for match
     const matchedJobsWithAnalysis = await Promise.all(
@@ -174,16 +184,22 @@ export async function GET() {
       (a, b) => b.matchPercentage - a.matchPercentage
     );
 
-    // Filter jobs with at least 30% match
-    const recommendedJobs = sortedJobs.filter(
-      (job) => job.matchPercentage >= 30
-    );
+    // Calculate pagination metadata
+    const totalPages = Math.ceil(totalJobs / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
 
     return NextResponse.json({
       success: true,
-      matchedJobs: recommendedJobs,
-      totalJobs: jobs.length,
-      matchedCount: recommendedJobs.length,
+      matchedJobs: sortedJobs,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalJobs,
+        jobsPerPage: limit,
+        hasNextPage,
+        hasPrevPage,
+      },
     });
   } catch (err) {
     console.error("Job Recommendations Error:", err);
