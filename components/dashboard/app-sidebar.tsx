@@ -15,6 +15,7 @@ import {
   Brain,
   BriefcaseBusiness,
   GraduationCap,
+  Target,
   User,
 } from "lucide-react";
 import Link from "next/link";
@@ -26,11 +27,16 @@ interface SidebarItem {
   icon: React.ComponentType<any>;
 }
 
-const items = [
+const items: SidebarItem[] = [
   {
     title: "Profile",
     url: "/",
     icon: User,
+  },
+  {
+    title: "Roadmap",
+    url: "/roadmap",
+    icon: Target,
   },
   {
     title: "Jobs",

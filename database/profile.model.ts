@@ -15,6 +15,7 @@ export interface IProfile extends Document {
   extractedRelevantRoled?: string[];
   experienceAndProjectOverview?: string;
   CVText?: string;
+  roadmapId?: Schema.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -95,6 +96,11 @@ const ProfileSchema = new Schema<IProfile>(
     CVText: {
       type: String,
       trim: true,
+      required: false,
+    },
+    roadmapId: {
+      type: Schema.Types.ObjectId,
+      ref: "Roadmap",
       required: false,
     },
   },
