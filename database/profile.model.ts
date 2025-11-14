@@ -10,6 +10,9 @@ export interface IProfile extends Document {
   experienceLevel: ExperienceLevel;
   careerTrack: string;
   skills?: string[];
+  extractedSkills?: string[];
+  extractedTools?: string[];
+  extractedRelevantRoled?: string[];
   experienceAndProjectOverview?: string;
   CVText?: string;
   createdAt: Date;
@@ -58,6 +61,30 @@ const ProfileSchema = new Schema<IProfile>(
       validate: {
         validator: (skills: string[]) => Array.isArray(skills),
         message: "Skills must be an array of strings",
+      },
+    },
+    extractedSkills: {
+      type: [String],
+      default: [],
+      validate: {
+        validator: (arr: string[]) => Array.isArray(arr),
+        message: "extractedSkills must be an array of strings",
+      },
+    },
+    extractedTools: {
+      type: [String],
+      default: [],
+      validate: {
+        validator: (arr: string[]) => Array.isArray(arr),
+        message: "extractedTools must be an array of strings",
+      },
+    },
+    extractedRelevantRoled: {
+      type: [String],
+      default: [],
+      validate: {
+        validator: (arr: string[]) => Array.isArray(arr),
+        message: "extractedRelevantRoled must be an array of strings",
       },
     },
     experienceAndProjectOverview: {

@@ -3,7 +3,7 @@
 import { Pen } from "lucide-react";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -15,16 +15,52 @@ import {
 
 export default function CvAndAdditionalInfo({
   cvAndAdditionalInfo,
+  extractedSkills = [],
+  extractedTools = [],
+  extractedRelevantRoled = [],
 }: {
   cvAndAdditionalInfo?: string;
+  extractedSkills?: string[];
+  extractedTools?: string[];
+  extractedRelevantRoled?: string[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState(cvAndAdditionalInfo || "");
   const [isSaving, setIsSaving] = useState(false);
+  const [extractedSkillsState, setExtractedSkillsState] =
+    useState<string[]>(extractedSkills);
+  const [extractedToolsState, setExtractedToolsState] =
+    useState<string[]>(extractedTools);
+  const [extractedRelevantRoledState, setExtractedRelevantRoledState] =
+    useState<string[]>(extractedRelevantRoled);
+
+  useEffect(() => {
+    // Fetch profile to get the latest extracted fields from DB
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/profile");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!mounted) return;
+        const profile = data?.profile;
+        if (!profile) return;
+        setExtractedSkillsState(profile.extractedSkills || []);
+        setExtractedToolsState(profile.extractedTools || []);
+        setExtractedRelevantRoledState(profile.extractedRelevantRoled || []);
+      } catch (err) {
+        console.error("Failed to fetch profile for extracted fields:", err);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
+      // Update CV text
       const response = await fetch("/api/profile/update-cv-text", {
         method: "POST",
         headers: {
@@ -35,12 +71,19 @@ export default function CvAndAdditionalInfo({
         }),
       });
 
-      if (response.ok) {
-        setIsOpen(false);
-        window.location.reload();
-      } else {
+      if (!response.ok) {
         alert("Failed to update CV and additional info");
+        setIsSaving(false);
+        return;
       }
+      try {
+        await response.json();
+      } catch (err) {
+        console.error("Error parsing response JSON:", err);
+      }
+
+      setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       console.error("Error updating CV and additional info:", error);
       alert("Error updating CV and additional info");
@@ -103,6 +146,69 @@ export default function CvAndAdditionalInfo({
         value={text}
         readOnly
       />
+
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <h3 className="text-lg font-semibold">Extracted Skills</h3>
+          {extractedSkillsState && extractedSkillsState.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {extractedSkillsState.map((s, idx) => (
+                <span
+                  key={`skill-${idx}`}
+                  className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground mt-2">
+              No extracted skills yet.
+            </p>
+          )}
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold">Extracted Tools</h3>
+          {extractedToolsState && extractedToolsState.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {extractedToolsState.map((t, idx) => (
+                <span
+                  key={`tool-${idx}`}
+                  className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground mt-2">
+              No extracted tools yet.
+            </p>
+          )}
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold">Relevant Roles</h3>
+          {extractedRelevantRoledState &&
+          extractedRelevantRoledState.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {extractedRelevantRoledState.map((r, idx) => (
+                <span
+                  key={`role-${idx}`}
+                  className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm"
+                >
+                  {r}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground mt-2">
+              No relevant roles extracted yet.
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

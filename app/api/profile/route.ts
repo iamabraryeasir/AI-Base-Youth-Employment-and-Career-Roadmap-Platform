@@ -38,6 +38,9 @@ export async function GET() {
         experienceLevel: profile.experienceLevel,
         careerTrack: profile.careerTrack,
         skills: profile.skills || [],
+        extractedSkills: profile.extractedSkills || [],
+        extractedTools: profile.extractedTools || [],
+        extractedRelevantRoled: profile.extractedRelevantRoled || [],
         experienceAndProjectOverview:
           profile.experienceAndProjectOverview || "",
         CVText: profile.CVText || "",

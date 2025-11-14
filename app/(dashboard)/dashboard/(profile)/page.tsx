@@ -24,12 +24,12 @@ export default async function ProfilePage() {
       <SkillsAndExpertise skills={userProfile?.skills} />
       <Separator />
 
+      <CvAndAdditionalInfo cvAndAdditionalInfo={userProfile?.CVText} />
+
+      <Separator />
       <ExperienceAndProjects
         experienceAndProjects={userProfile?.experienceAndProjectOverview}
       />
-      <Separator />
-
-      <CvAndAdditionalInfo cvAndAdditionalInfo={userProfile?.CVText} />
     </section>
   );
 }
