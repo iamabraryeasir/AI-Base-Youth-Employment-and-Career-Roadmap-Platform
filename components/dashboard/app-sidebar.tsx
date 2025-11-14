@@ -33,20 +33,16 @@ const items: SidebarItem[] = [
     url: "/",
     icon: User,
   },
+
   {
     title: "Roadmap",
     url: "/roadmap",
     icon: Target,
   },
   {
-    title: "Jobs",
-    url: "/jobs",
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: "Resources",
-    url: "/resources",
-    icon: GraduationCap,
+    title: "CV Builder",
+    url: "/cv-builder",
+    icon: User,
   },
   {
     title: "Job Matches",
@@ -57,6 +53,16 @@ const items: SidebarItem[] = [
     title: "Resource Matches",
     url: "/resource-matches",
     icon: Brain,
+  },
+  {
+    title: "Jobs",
+    url: "/jobs",
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: "Resources",
+    url: "/resources",
+    icon: GraduationCap,
   },
 ];
 
