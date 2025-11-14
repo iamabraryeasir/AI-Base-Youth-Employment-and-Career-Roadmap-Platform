@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 AI-Powered Career Navigator (SDG 8 Project)
 
-## Getting Started
+A modern full-stack web application that helps students and young job seekers discover career-aligned jobs and learning resources. The platform connects user skills → jobs → learning materials using smart matching logic and (future) AI-powered recommendations.
 
-First, run the development server:
+---
+
+## 🛠 Tech Stack
+
+| Category  | Technology                         |
+| --------- | ---------------------------------- |
+| Framework | Next.js 16 (App Router, Fullstack) |
+| Language  | TypeScript                         |
+| Styling   | TailwindCSS + shadcn/ui            |
+| Auth      | Better Auth                        |
+| Database  | MongoDB + Mongoose                 |
+| Icons     | lucide-react                       |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/iamabraryeasir/AI-Base-Youth-Employment-and-Career-Roadmap-Platform.git
+cd AI-Base-Youth-Employment-and-Career-Roadmap-Platform
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun install
+# or
+npm install
+# or
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3️⃣ Environment Variables
 
-## Learn More
+Create a `.env` file in the root folder and add:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+MONGODB_URI=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_better_auth_secret
+BETTER_AUTH_URL=http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> **Note:**
+>
+> - `BETTER_AUTH_SECRET` must be a long, random string.
+> - If deployed on Vercel, update `BETTER_AUTH_URL` accordingly.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ▶️ Run the Application
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Start the dev server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+bun run dev
+# or
+npm run dev
+# or
+pnpm dev
+```
+
+The app will be available at:
+👉 **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 🌱 Seed Data Usage
+
+This project includes **jobSeeder.ts** and **resourceSeeder.ts** for quick database seeding.
+
+### Run Job Seeder
+
+```bash
+bun run seed-data
+```
+
+> Ensure **MONGODB_URI** is defined in your `.env` before running seeders.
+
+---
+
+## 📁 Project Structure (Quick Overview)
+
+```
+src/
+ ├─ app/                 → Next.js routes (API + Pages)
+ ├─ database/            → Mongoose models
+ ├─ lib/                 → DB connection, auth, helpers
+ ├─ seeders/             → job/resource seed scripts
+ └─ components/          → UI components
+```
+
+---
+
+## ✔ Additional Notes
+
+- API routes such as `/api/jobs`, `/api/resources`, and `/api/recommendations/*` are fully protected using Better Auth.
+- Matching logic is implemented in separate recommendation endpoints.
+- The system is designed to support LLM-based recommendations in the next phase of the hackathon.
