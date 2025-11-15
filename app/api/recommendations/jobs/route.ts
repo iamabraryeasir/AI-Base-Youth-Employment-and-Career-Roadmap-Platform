@@ -37,7 +37,7 @@ Please analyze and return a JSON response with:
 3. missingSkills: An array of skills the candidate is missing for this job
 
 Consider:
-- Skill overlap (exact and similar skills)
+- Skill overlap (exact and similar skills) -> if no similar skills found then the percentage should be 0 don't consider anything else
 - Experience level compatibility
 - Career track alignment
 

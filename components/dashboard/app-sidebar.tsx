@@ -34,17 +34,6 @@ const items: SidebarItem[] = [
     url: "/",
     icon: User,
   },
-
-  {
-    title: "Roadmap",
-    url: "/roadmap",
-    icon: Target,
-  },
-  {
-    title: "CV Builder",
-    url: "/cv-builder",
-    icon: User,
-  },
   {
     title: "Job Matches",
     url: "/job-matches",
@@ -56,9 +45,19 @@ const items: SidebarItem[] = [
     icon: Brain,
   },
   {
+    title: "Roadmap",
+    url: "/roadmap",
+    icon: Target,
+  },
+  {
     title: "Ask CareerBot",
     url: "/careerbot",
     icon: BotMessageSquare,
+  },
+  {
+    title: "CV Builder",
+    url: "/cv-builder",
+    icon: User,
   },
   {
     title: "Jobs",
