@@ -80,7 +80,7 @@ export default function JobCard({ job }: JobCardProps) {
         </p>
       </CardHeader>
 
-      <CardContent className="space-y-4 flex-grow">
+      <CardContent className="space-y-4 grow">
         {job.matchPercentage !== undefined && (
           <MatchPercentageBar percentage={job.matchPercentage} />
         )}
